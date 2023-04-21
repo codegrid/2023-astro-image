@@ -1,6 +1,8 @@
 ---
 import ListItem from "../components/list-item.astro";
 import thumbnail1 from "../assets/thumbnail-1.jpg";
+import { getCollection } from "astro:content";
+const articles = await getCollection("article");
 ---
 
 <html lang='ja'>
@@ -14,7 +16,20 @@ import thumbnail1 from "../assets/thumbnail-1.jpg";
   <body>
     <h1>2023 CodeGrid Astro Image デモブログ</h1>
     <ul>
-      <ListItem image={thumbnail1} title='記事タイトル1' />
+      {
+        articles.map(({ data: { thumbnail, title } }) => {
+          return <ListItem image={thumbnail} title={title} />;
+        })
+      }
     </ul>
   </body>
 </html>
+<style>
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 924px;
+    margin: auto;
+  }
+</style>
