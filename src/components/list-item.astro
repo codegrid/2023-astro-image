@@ -5,7 +5,13 @@ const { image, title } = Astro.props;
 
 <li>
   <a href='#'>
-    <Image src={image} alt={`ブログ：${title}のサムネイル画像`} width={300} />
+    <Image
+      src={image}
+      alt={`ブログ：${title}のサムネイル画像`}
+      width={300}
+      format='webp'
+      quality='mid'
+    />
     <h2>{title}</h2>
   </a>
 </li>
